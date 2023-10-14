@@ -22,8 +22,12 @@ const getProducts = async (query: Query): Promise<Product[]> => {
   });
 
   const res = await fetch(url);
+  const products = await res.json(); // Specify the type of products
 
-  return res.json();
+  // Filter out products with quantity less than or equal to zero
+  const filteredProducts = products.filter((product: Product) => product.quantity > 0);
+  console.log(filteredProducts)
+  return filteredProducts;
 };
 
 export default getProducts;
